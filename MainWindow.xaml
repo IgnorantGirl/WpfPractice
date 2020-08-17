@@ -1,0 +1,60 @@
+﻿<Window x:Class="WpfPractice.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfPractice.ViewModel.Login"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <local:NameViewModel/>
+    </Window.DataContext>
+
+    <Grid HorizontalAlignment="Right" Width="792">
+        <Button Margin="115,175,527,94" >
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="Green"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Blue"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Button.Width>150</Button.Width>
+            <Button.Height>150</Button.Height>
+        </Button>
+        <Label x:Name="LblFontSize" Content="SoftEasy" FontSize="{Binding ElementName=slider,Path=Value,Mode=TwoWay}" 
+               Margin="24,18,0,0"  HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Slider x:Name="slider" HorizontalAlignment="Left" Margin="24,117,0,0"
+                VerticalAlignment="Top" Width="330" Maximum="80" Minimum="20" />
+        <TextBox x:Name="TxtFontSize" HorizontalAlignment="Left" Height="23" Margin="24,69,0,0"
+                 TextWrapping="Wrap" Text="{Binding ElementName=slider,Path=Value,Mode=TwoWay}"
+                 VerticalAlignment="Top" Width="120" />
+
+        <Slider x:Name="slider1" HorizontalAlignment="Left" Margin="24,330,0,0" Background="Blue"
+                VerticalAlignment="Top" Width="200" Maximum="100" Minimum="0" 
+                TickFrequency="1" IsSnapToTickEnabled="True">
+            <Slider.Opacity>
+                <Binding Path="Value">
+                    <Binding.RelativeSource>
+                        <RelativeSource Mode="Self"></RelativeSource>
+                    </Binding.RelativeSource>
+                </Binding>
+            </Slider.Opacity>
+        </Slider>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="573,92,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="186" 
+                 Text="{Binding UserName }"/>
+        <StackPanel VerticalAlignment="Center" Orientation="Vertical" Height="150" Margin="288,175,378,94"  Background="LightBlue">
+            <TextBlock Text="用户名" Margin="10,5"/>
+            <TextBlock Text="{Binding UserName}" Margin="10,5"/>
+            <TextBlock Text="公司名称" Margin="10"/>
+            <TextBlock Text="{Binding CompanyName}" Margin="10"/>
+            <Button Content="更新" HorizontalAlignment="Left" Margin="10,5" VerticalAlignment="Top" Width="75" Click="Update_Click"/>
+
+        </StackPanel>
+        
+    </Grid>
+
+</Window>
